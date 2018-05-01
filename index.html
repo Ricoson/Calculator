@@ -391,7 +391,7 @@
 						calculatorElem.sign.innerHTML=symbol;
 					};
 					
-					//把所有的算法函数封装起来
+					//就是接受参数将运算结果返回把这个过程封装模块暴露接口，
 					var operate=(function(){
 						var operation={
 						 	add:function(num1,num2){
@@ -413,7 +413,7 @@
 								return operation;
 							}
 						};
-						//运算
+						//完善代码不明确传多少参数，使用类数组arguments
 						function operate(name,num1,num2){
 							if(!operation[name]) throw new Error('不存在名为'+name+'的运算方法！');
 							return operation[name].apply(operation,[].slice.call(arguments,1,arguments.length));
