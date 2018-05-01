@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<!--简易的计算机代码优化和更新-->
+		<div id="calculator">
+			<p>
+				<input type="text" class="formerInput" value="1" />
+				<span class="sign">+</span>
+				<input type="text" class="laterInput" value="1" />
+				<span>=</span>
+				<span class="resultOutput">2</span>
+			</p>
+			<p>
+				<!--代码最容易想到的写法-->
+				<!--<input type="button" value="+" onclick="addHandler();" />
+				<input type="button" value="-" onclick="subtractHandler();" />
+				<input type="button" value="×" onclick="multiplyHandler();" />
+				<input type="button" value="÷" onclick="divideHandler();" />-->
+				
+				
+				<!--代码的第一次优化和改写更新：代码的结构和行为分离-->
+				<input type="button" value="+" class="btn" title="add" />
+				<input type="button" value="-" class="btn" title="subtract" />
+				<input type="button" value="×" class="btn" title="multiply" />
+				<input type="button" value="÷" class="btn" title="divide" />
+				<input type="button" value="%" class="btn" title="mod" />
+				<input type="button" value="^" class="btn" title="power" />
+				<input type="button" value="1/x" class="btn" title="invert" />
+			</p>
+		</div>
+	</body>
+	<script type="text/javascript">
+	//代码最容易想到的写法
+			/*var calculator=document.querySelector('#calculator');
+			var formerInput=calculator.querySelector('.formerInput');
+			var sign=calculator.querySelector('.sign');
+			var laterInput=calculator.querySelector('.laterInput');
+			var resultOutput=calculator.querySelector('.resultOutput');
+			function addHandler(){
+				sign.innerHTML='+';
+				resultOutput.innerHTML= +formerInput.value + +laterInput.value;
+			}
+			function subtractHandler(){
+				sign.innerHTML='-';
+				resultOutput.innerHTML=formerInput.value-laterInput.value;
+			}
+			function multiplyHandler(){
+				sign.innerHTML='*';
+				resultOutput.innerHTML=formerInput.value*laterInput.value;
+			}
+			function divideHandler(){
+				sign.innerHTML='/';
+				resultOutput.innerHTML=formerInput.value/laterInput.value;
+			}*/
+		
+		
+	//代码的第一次优化和改写更新--代码的结构和行为分离
+			/*var calculator=document.querySelector('#calculator');
+			var formerInput=calculator.querySelector('.formerInput');
+			var sign=calculator.querySelector('.sign');
+			var laterInput=calculator.querySelector('.laterInput');
+			var resultOutput=calculator.querySelector('.resultOutput');
+			//获取所有的运算符
+			var btns=calculator.querySelectorAll('.btn');
+			
+			//绑定事件
+			//  +
+			btns[0].onclick=addHandler;
+			//  -
+			btns[1].onclick=subtractHandler;
+			//  x
+			btns[2].onclick=multiplyHandler;
+			//  ÷
+			btns[3].onclick=divideHandler;
+			
+			  // 加
+		     function addHandler() {
+		     	sign.innerHTML = '+';
+		     	resultOutput.innerHTML = +formerInput.value + +laterInput.value;
+		     	console.log("woow");
+		     }
+		     // 减
+		     function subtractHandler() {
+		     	sign.innerHTML = '-';
+		     	resultOutput.innerHTML = formerInput.value - laterInput.value;
+		     }
+		     // 乘
+		     function multiplyHandler() {
+		     	sign.innerHTML = '×';
+		     	resultOutput.innerHTML = formerInput.value * laterInput.value;
+		     }
+		     // 除
+		     function divideHandler() {
+		     	sign.innerHTML = '÷';
+		     	resultOutput.innerHTML = formerInput.value / laterInput.value;
+		     }*/
+	//代码第二次优化和改写更新--循环
+			/*var calculator=document.querySelector('#calculator');
+			var formerInput=calculator.querySelector('.formerInput');
+			var sign=calculator.querySelector('.sign');
+			var laterInput=calculator.querySelector('.laterInput');
+			var resultOutput=calculator.querySelector('.resultOutput');
+			//获取所有的运算符
+			var btns=calculator.querySelectorAll('.btn');
+			for(var i=0;i<btns.length;i++){
+				btns[i].onclick=function (){
+					switch(this.title){
+						case "add":
+							addHandler();
+							break;
+						case "subtract":
+							subtractHandler();
+		     				break;
+						case "multiply":
+							multiplyHandler();
+		   					break;
+						case "divide":
+							divideHandler();
+		     				break;
+						}
+				};	
+			}
+			 // 加
+		     function addHandler() {
+		     	sign.innerHTML = '+';
+		     	resultOutput.innerHTML = +formerInput.value + +laterInput.value;
+		     	console.log("woow");
+		     }
+		     // 减
+		     function subtractHandler() {
+		     	sign.innerHTML = '-';
+		     	resultOutput.innerHTML = formerInput.value - laterInput.value;
+		     }
+		     // 乘
+		     function multiplyHandler() {
+		     	sign.innerHTML = '×';
+		     	resultOutput.innerHTML = formerInput.value * laterInput.value;
+		     }
+		     // 除
+		     function divideHandler() {
+		     	sign.innerHTML = '÷';
+		     	resultOutput.innerHTML = formerInput.value / laterInput.value;
+		     }*/
+	//代码的第三次优化和改写更新--提取函数
+			/*var calculator=document.querySelector('#calculator');
+			var formerInput=calculator.querySelector('.formerInput');
+			var sign=calculator.querySelector('.sign');
+			var laterInput=calculator.querySelector('.laterInput');
+			var resultOutput=calculator.querySelector('.resultOutput');
+			//获取所有的运算符
+			var btns=calculator.querySelectorAll('.btn');
+			
+			//遍历
+			function each(array,fn){
+				for(var i=0;i<array.length;i++){
+					fn(i,array[i]);
+				}
+			}
+			each(btns,function (index,elem){
+				elem.onclick=function (){
+					switch(this.title){
+						case "add":
+							addHandler();
+							break;
+						case "subtract":
+							subtractHandler();
+		     				break;
+						case "multiply":
+							multiplyHandler();
+		   					break;
+						case "divide":
+							divideHandler();
+		     				break;
+						}
+				};	
+			});
+			//更新符号
+			function updateSign(symbol){
+				sign.innerHTML=symbol;
+			};
+			//一个函数尽量让它做一件事
+			//加法
+			function add(num1,num2){
+				return +num1 + +num2;
+			};
+			//减法
+			function subtract(num1,num2){
+				return num1-num2;
+			};
+			//乘法
+			function multiplyd(num1,num2){
+				return num1*num2;
+			};
+			//除法
+			function divide(num1,num2){
+				return num1/num2;
+			};
+			//输出结果
+			function outputResult(result){
+				resultOutput.innerHTML=result;
+			};
+			
+			
+			// 加
+		    function addHandler() {
+		     	updateSign("+");
+		     	outputResult(add(formerInput.value,laterInput.value));
+		    };
+		     // 减
+		    function subtractHandler() {
+		     	updateSign("-");
+		     	outputResult(subtract(formerInput.value,laterInput.value));
+		    };
+		     // 乘
+		    function multiplyHandler() {
+		     	updateSign("x");
+		     	outputResult(multiplyd(formerInput.value,laterInput.value));
+		    };
+		     // 除
+		    function divideHandler() {
+		    	updateSign("÷");
+		     	routputResult(divide(formerInput.value,laterInput.value));
+		     };*/
+	//代码的第四次优化和改写更新--管理代码
+			/*	var wrapElem=document.querySelector('#calculator');
+				var calculatorElem={
+					formerInput:wrapElem.querySelector('.formerInput'),
+					sign:wrapElem.querySelector('.sign'),
+					laterInput:wrapElem.querySelector('.laterInput'),
+					resultOutput:wrapElem.querySelector('.resultOutput'),
+					btns: wrapElem.querySelectorAll('.btn')
+				};
+				//遍历
+				function each(array,fn){
+					for(var i=0;i<array.length;i++){
+						fn(i,array[i]);
+					}
+				}
+				each(calculatorElem.btns,function (index,elem){
+					elem.onclick=function (){
+						switch(this.title){
+							case "add":
+								addHandler();
+								break;
+							case "subtract":
+								subtractHandler();
+			     				break;
+							case "multiply":
+								multiplyHandler();
+			   					break;
+							case "divide":
+								divideHandler();
+			     				break;
+							}
+					};	
+				});
+				//更新符号
+				function updateSign(symbol){
+					calculatorElem.sign.innerHTML=symbol;
+				};
+				//把所有的算法函数封装起来
+				var operation={
+				 	add:function(num1,num2){
+				 		return +num1 + +num2;
+					},
+				 	subtract:function(num1,num2){
+						return num1-num2;
+					},
+					multiplyd:function(num1,num2){
+						return num1*num2;
+					},
+					divide:function(num1,num2){
+						return num1/num2;
+					}
+				}
+				//输出结果
+				function outputResult(result){
+					calculatorElem.resultOutput.innerHTML=result;
+				};
+				// 加
+			    function addHandler() {
+			     	updateSign("+");
+			     	outputResult(operation.add(calculatorElem.formerInput.value,calculatorElem.laterInput.value));
+			    };
+			     // 减
+			    function subtractHandler() {
+			     	updateSign("-");
+			     	outputResult(operation.subtract(calculatorElem.formerInput.value,calculatorElem.laterInput.value));
+			    };
+			     // 乘
+			    function multiplyHandler() {
+			     	updateSign("x");
+			     	outputResult(operation.multiplyd(calculatorElem.formerInput.value,calculatorElem.laterInput.value));
+			    };
+			     // 除
+			    function divideHandler() {
+			    	updateSign("÷");
+			     	routputResult(operation.divide(calculatorElem.formerInput.value,calculatorElem.laterInput.value));
+			     };*/
+	//代码第五次优化和改写更新--开闭原则（OCP）
+				/*var wrapElem=document.querySelector('#calculator');
+				var calculatorElem={
+					formerInput:wrapElem.querySelector('.formerInput'),
+					sign:wrapElem.querySelector('.sign'),
+					laterInput:wrapElem.querySelector('.laterInput'),
+					resultOutput:wrapElem.querySelector('.resultOutput'),
+					btns: wrapElem.querySelectorAll('.btn')
+				};
+				//遍历
+				function each(array,fn){
+					for(var i=0;i<array.length;i++){
+						fn(i,array[i]);
+					}
+				}
+				//绑定事件
+				each(calculatorElem.btns,function (index,elem){
+					elem.onclick=function(){
+						updateSign(this.value);
+						outputResult(operate(this.title,calculatorElem.formerInput.value,calculatorElem.laterInput.value))
+					};
+				});
+				//更新符号
+				function updateSign(symbol){
+					calculatorElem.sign.innerHTML=symbol;
+				};
+				//运算
+				function operate(name,num1,num2){
+					if(!operation[name]) throw new Error('不存在名为'+name+'的运算方法！');
+					return operation[name](num1,num2);
+				}
+				//把所有的算法函数封装起来
+				var operation={
+				 	add:function(num1,num2){
+				 		return +num1 + +num2;
+					},
+				 	subtract:function(num1,num2){
+						return num1-num2;
+					},
+					multiplyd:function(num1,num2){
+						return num1*num2;
+					},
+					divide:function(num1,num2){
+						return num1/num2;
+					},
+					addOperation:function (name,fn){
+						if(!this[name]){
+							this[name]=fn;
+						}
+						return this;
+					}
+				};
+				//增加新的算法
+				operation.addOperation('mod',function(num1,num2){
+					return num1%num2;
+				}).addOperation('power',function(base,power){
+					return Math.pow(base,power);
+				});
+				//输出结果
+				function outputResult(result){
+					calculatorElem.resultOutput.innerHTML=result;
+				};*/
+	//代码第六次优化和改写更新--模块化
+				(function (){
+					var wrapElem=document.querySelector('#calculator');
+					var calculatorElem={
+						formerInput:wrapElem.querySelector('.formerInput'),
+						sign:wrapElem.querySelector('.sign'),
+						laterInput:wrapElem.querySelector('.laterInput'),
+						resultOutput:wrapElem.querySelector('.resultOutput'),
+						btns: wrapElem.querySelectorAll('.btn')
+					};
+					//遍历
+					function each(array,fn){
+						for(var i=0;i<array.length;i++){
+							fn(i,array[i]);
+						}
+					}
+					//绑定事件
+					each(calculatorElem.btns,function (index,elem){
+						elem.onclick=function(){
+							updateSign(this.value);
+							outputResult(operate(this.title,calculatorElem.formerInput.value,calculatorElem.laterInput.value))
+						};
+					});
+					//更新符号
+					function updateSign(symbol){
+						calculatorElem.sign.innerHTML=symbol;
+					};
+					
+					//把所有的算法函数封装起来
+					var operate=(function(){
+						var operation={
+						 	add:function(num1,num2){
+						 		return +num1 + +num2;
+							},
+						 	subtract:function(num1,num2){
+								return num1-num2;
+							},
+							multiply:function(num1,num2){
+								return num1*num2;
+							},
+							divide:function(num1,num2){
+								return num1/num2;
+							},
+							addOperation:function (name,fn){
+								if(!operation[name]){
+									operation[name]=fn;
+								}
+								return operation;
+							}
+						};
+						//运算
+						function operate(name,num1,num2){
+							if(!operation[name]) throw new Error('不存在名为'+name+'的运算方法！');
+							return operation[name].apply(operation,[].slice.call(arguments,1,arguments.length));
+						}
+						operate.addOperation=operation.addOperation;
+						
+						return operate;
+					})();
+					//增加新的算法
+					operate.addOperation('mod',function(num1,num2){
+						return num1%num2;
+					}).addOperation('power',function(base,power){
+						return Math.pow(base,power);
+					}).addOperation('invert',function(num){
+						return 1/num
+					});
+					//输出结果
+					function outputResult(result){
+						calculatorElem.resultOutput.innerHTML=result;
+					};
+				})()
+				
+	</script>
+</html>
