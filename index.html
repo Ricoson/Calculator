@@ -21,7 +21,6 @@
 				<input type="button" value="×" onclick="multiplyHandler();" />
 				<input type="button" value="÷" onclick="divideHandler();" />-->
 				
-				
 				<!--代码的第一次优化和改写更新：代码的结构和行为分离-->
 				<input type="button" value="+" class="btn" title="add" />
 				<input type="button" value="-" class="btn" title="subtract" />
@@ -98,6 +97,7 @@
 		     	sign.innerHTML = '÷';
 		     	resultOutput.innerHTML = formerInput.value / laterInput.value;
 		     }*/
+
 	//代码第二次优化和改写更新--循环
 			/*var calculator=document.querySelector('#calculator');
 			var formerInput=calculator.querySelector('.formerInput');
@@ -145,6 +145,7 @@
 		     	sign.innerHTML = '÷';
 		     	resultOutput.innerHTML = formerInput.value / laterInput.value;
 		     }*/
+
 	//代码的第三次优化和改写更新--提取函数
 			/*var calculator=document.querySelector('#calculator');
 			var formerInput=calculator.querySelector('.formerInput');
@@ -225,6 +226,7 @@
 		    	updateSign("÷");
 		     	routputResult(divide(formerInput.value,laterInput.value));
 		     };*/
+
 	//代码的第四次优化和改写更新--管理代码
 			/*	var wrapElem=document.querySelector('#calculator');
 				var calculatorElem={
@@ -301,6 +303,7 @@
 			    	updateSign("÷");
 			     	routputResult(operation.divide(calculatorElem.formerInput.value,calculatorElem.laterInput.value));
 			     };*/
+
 	//代码第五次优化和改写更新--开闭原则（OCP）
 				/*var wrapElem=document.querySelector('#calculator');
 				var calculatorElem={
@@ -363,6 +366,7 @@
 				function outputResult(result){
 					calculatorElem.resultOutput.innerHTML=result;
 				};*/
+				
 	//代码第六次优化和改写更新--模块化
 				(function (){
 					var wrapElem=document.querySelector('#calculator');
