@@ -11,7 +11,7 @@
 具体是把计算机所用元素和计算机运算分别放在calculatorElem对象和operation中
 第五次：OCP(Open Closed Principe)关闭原则
 把switch-case用operate运算函数代替，利用计算机增加新的功能，在operation对象中添加提供新运算的方法addOperation,
-在函数中先判断是否已有该运算，添加链式操作
+在函数中先判断是否已有该运算，添加链式操作wowo
 第六次：代码模块化
 使用匿名函数自调用避免全局作用域污染变量环境，具体就是接受参数将运算结果返回把这个过程封装模块返回
 operate函数然后给外界暴露operate接口,增加取余、幂运算的计算
