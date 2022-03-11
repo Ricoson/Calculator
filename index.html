@@ -391,6 +391,7 @@
 					each(calculatorElem.btns,function (index,elem){
 						elem.onclick=function(){
 							updateSign(this.value);
+							// dkjl
 							outputResult(operate(this.title,calculatorElem.formerInput.value,calculatorElem.laterInput.value))
 						};
 					});
